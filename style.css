@@ -1,0 +1,132 @@
+body {
+  font-family: "Harmattan", sans-serif;
+  text-align: center;
+  font-size: 20px;
+}
+
+.container {
+  width: 960px;
+  height: 720px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#left,
+#right {
+  width: 480px;
+  height: 720px;
+  position: absolute;
+}
+#left {
+  left: 0;
+}
+
+#right {
+  right: 0;
+}
+
+#woman,
+#bed,
+#curtain_on_bed,
+#guest,
+#player,
+#bg {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+#bg {
+  background-image: url("assets/bg.png");
+  z-index: 1;
+}
+#woman {
+  background-image: url("assets/beauty.png");
+  z-index: 0;
+}
+
+#bed {
+  background-image: url("assets/bed.png");
+  z-index: 3;
+}
+#curtain_on_bed {
+  background-image: url("assets/curtain_on_bed.png");
+  z-index: 5;
+}
+#guest {
+  background-image: url("assets/guest.png");
+  z-index: 4;
+}
+#player {
+  background-image: url("assets/player.png");
+  z-index: 2;
+}
+#scrubber {
+  width: 100px;
+  height: 140px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  background-image: url("assets/scrubber.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10;
+}
+#back_dirt {
+  width: 300px;
+  height: 400px;
+  position: absolute;
+  background-image: url("assets/back_dirt.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 9;
+  right: 80px;
+  top: 200px;
+}
+
+#dialogue_player,
+#dialogue_guest {
+  padding: 5px 10px;
+  background-color: black;
+  position: absolute;
+  color: white;
+  border-radius: 10px;
+  z-index: 10;
+  width: 200px;
+  line-height: 1.2em;
+  text-align: left;
+}
+#dialogue_player {
+  top: 150px;
+  right: 240px;
+}
+#dialogue_player::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 100%;
+  height: 0;
+  width: 0;
+  border: 8px solid transparent;
+  border-left: 8px solid black;
+}
+#dialogue_guest {
+  top: 400px;
+  left: 250px;
+}
+#dialogue_guest::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: -16px;
+  left: 60%;
+  height: 0;
+  width: 0;
+  border: 8px solid transparent;
+  border-bottom: 8px solid black;
+}

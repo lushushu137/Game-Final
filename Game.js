@@ -4,9 +4,14 @@ import {Dialogue} from './Dialogue.js';
 
 // let scrubber = new Scrubber();
 let woman = new Woman();
+console.log(woman)
+let dialogue = new Dialogue(woman.currWoman.dialogue);
 let inputList = [];
 let start = 0;
-let dialogue = new Dialogue();
+let playerAnimationStatus = {
+    stop: 'url(/assets/player.png)',
+    animation: 'url(/assets/player.gif)'
+}
 let dirtState = {
     "00": true,
     "01":true,
@@ -30,15 +35,42 @@ let clearArea = (inputList) => {
                 // remove dirt view
                 document.getElementById(coordinate).style.opacity = 0;
                 // animate charactor
-                document.getElementById("player").style.backgroundImage = 'url(/assets/player.gif)';
+                setPlayerAnimation(playerAnimationStatus.animation);
                 dirtState[coordinate] = false;
                 dialogue.next();
-                if (dialogue.finish) {
-                    document.getElementById("player").style.backgroundImage = 'url(/assets/player.png)';
+                if (Object.keys(dirtState).every(d => dirtState[d] === false)) {
+                    handleEnd();
                 }
             }
         }
     }
+}
+
+let handleEnd = () => {
+    setPlayerAnimation(playerAnimationStatus.stop);
+    setTimeout(() => {
+        resetDirt();
+        nextWoman();
+    }, 5000)
+
+}
+
+let resetDirt = () => {
+    let rowHTMLCollection = document.getElementsByClassName("row");
+    for (let i = 0; i < rowHTMLCollection.length; i++) {
+        let curr = rowHTMLCollection.item(i);
+        curr.style.opacity = 1;
+    }
+    Object.keys(dirtState).forEach(d => dirtState[d] = true);
+}
+
+let setPlayerAnimation = (status) => {
+    document.getElementById("player").style.backgroundImage = status;
+}
+
+let nextWoman = () => {
+    woman.next();
+    dialogue = new Dialogue(woman.currWoman.dialogue)
 }
 
 let checkScroll = () => {
@@ -56,6 +88,4 @@ let checkScroll = () => {
 }
 
 checkScroll();
-dialogue.begin();
-woman.render();
 

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game Final</title>
     <link rel="stylesheet" href="style.css" />
-    <script type="module" src="Scrubber.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,14 +18,46 @@
     <!-- <h3>- made by Lu Shu</h3> -->
     <div class="container">
       <div id="left">
-        <div id="dialogue_player">
-          ok Lorem ipsum dolor Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Quis praesentium error dignissimos.
-        </div>
-        <div id="dialogue_guest">hi.harder please Lorem ipsum dolor sit</div>
+        <div id="dialogue_player"></div>
+        <div id="dialogue_guest"></div>
       </div>
       <div id="right">
-        <div id="scrubber"></div>
+        <div id="grid">
+          <!-- <div id="scrubber"></div> -->
+          <div class="col">
+            <div class="row" id="00" style="background-position: 20% 50%">
+              00
+            </div>
+            <div class="row" id="10" style="background-position: 0% 100%">
+              10
+            </div>
+            <div class="row" id="20" style="background-position: 30% 40%">
+              20
+            </div>
+          </div>
+          <div class="col">
+            <div class="row" id="01" style="background-position: 90% 20%">
+              01
+            </div>
+            <div class="row" id="11" style="background-position: 90% 40%">
+              11
+            </div>
+            <div class="row" id="21" style="background-position: 30% 80%">
+              21
+            </div>
+          </div>
+          <div class="col">
+            <div class="row" id="02" style="background-position: 40% 100%">
+              02
+            </div>
+            <div class="row" id="12" style="background-position: 60% 70%">
+              12
+            </div>
+            <div class="row" id="22" style="background-position: 20% 20%">
+              22
+            </div>
+          </div>
+        </div>
       </div>
       <div id="bg"></div>
       <div id="bed"></div>
@@ -34,7 +65,7 @@
       <div id="curtain_on_bed"></div>
       <div id="guest"></div>
       <div id="woman">
-        <div id="back_dirt"></div>
+        <!-- <div id="back_dirt"></div> -->
       </div>
     </div>
     <script type="module" src="Game.js"></script>

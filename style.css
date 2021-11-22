@@ -44,7 +44,7 @@ body {
   z-index: 1;
 }
 #woman {
-  background-image: url("assets/beauty.png");
+  /* background-image: url("assets/beauty.png"); */
   z-index: 0;
 }
 
@@ -74,7 +74,6 @@ body {
   background-image: url("assets/scrubber.png");
   background-size: contain;
   background-repeat: no-repeat;
-  z-index: 10;
 }
 #back_dirt {
   width: 300px;
@@ -96,9 +95,11 @@ body {
   color: white;
   border-radius: 10px;
   z-index: 10;
-  width: 200px;
+  max-width: 200px;
   line-height: 1.2em;
   text-align: left;
+  opacity: 0;
+  transition: opacity 0.5s linear;
 }
 #dialogue_player {
   top: 150px;
@@ -129,4 +130,30 @@ body {
   width: 0;
   border: 8px solid transparent;
   border-bottom: 8px solid black;
+}
+
+#grid {
+  width: 249px;
+  height: 300px;
+  position: absolute;
+  left: 50%;
+  top: 265px;
+  transform: translate(-50%);
+  display: flex;
+  z-index: 10;
+}
+.col {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  /* border: solid 1px; */
+  flex-grow: 1;
+  color: rgba(134, 32, 0, 0);
+  background-image: url("./assets/dirt.png");
+  transition: opacity 0.5s linear;
+  background-size: 50px;
+  background-repeat: no-repeat;
 }

@@ -10,12 +10,15 @@ export class Dialogue {
     beginIterator;
     nextIterator;
     endIterator;
+    endEvent;
+    // isEnd = false;
     constructor(dialogueList){
         this.dialogueList = dialogueList;
         this.beginIterator = iterator(dialogueList.begin);
         this.nextIterator = iterator(dialogueList.next);
         this.iterator = iterator(dialogueList.end);
         this.begin();
+        this.endEvent = new Event("isEnd");
     }
     begin(){
         let getBegin = setInterval(()=> {
@@ -45,8 +48,10 @@ export class Dialogue {
             } else {
                 clearInterval(getEnd);
                 document.getElementById(`dialogue_player`).style.opacity = 0;
-                document.getElementById(`dialogue_guest`).style.opacity = 0;}
-        }, 1000)
+                document.getElementById(`dialogue_guest`).style.opacity = 0;
+                document.dispatchEvent(this.endEvent);
+            }
+            }, 1000)
     }
     render(character, content){
         document.getElementById(`dialogue_${character}`).style.opacity = 1;

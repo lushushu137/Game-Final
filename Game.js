@@ -39,22 +39,31 @@ let clearArea = (inputList) => {
                 dirtState[coordinate] = false;
                 dialogue.next();
                 if (Object.keys(dirtState).every(d => dirtState[d] === false)) {
-                    handleEnd();
+                    handleDirtEnd();
                 }
             }
         }
     }
 }
 
-let handleEnd = () => {
+let handleDirtEnd = () => {
     setPlayerAnimation(playerAnimationStatus.stop);
+}
+let handleDialogueEnd = () => {
+    switchBrightness(0);
     setTimeout(() => {
+        switchBrightness(1);
+      setTimeout(()=>{
         resetDirt();
         nextWoman();
-    }, 5000)
-
+      }, 1000)
+    }, 2000)
+ 
 }
 
+let switchBrightness = (value) => {
+    document.getElementById('container').style.filter = `brightness(${value})`;
+}
 let resetDirt = () => {
     let rowHTMLCollection = document.getElementsByClassName("row");
     for (let i = 0; i < rowHTMLCollection.length; i++) {
@@ -63,6 +72,7 @@ let resetDirt = () => {
     }
     Object.keys(dirtState).forEach(d => dirtState[d] = true);
 }
+
 
 let setPlayerAnimation = (status) => {
     document.getElementById("player").style.backgroundImage = status;
@@ -89,3 +99,4 @@ let checkScroll = () => {
 
 checkScroll();
 
+document.addEventListener("isEnd", handleDialogueEnd)

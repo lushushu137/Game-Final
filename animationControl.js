@@ -15,3 +15,7 @@ export let setWomanAnimation = (movement) => {
 export let setPlayerAnimation = (status) => {
     document.getElementById("player").style.backgroundImage = status;
 }
+
+export  let switchBrightness = (value) => {
+    document.getElementById('game').style.filter = `brightness(${value})`;
+}

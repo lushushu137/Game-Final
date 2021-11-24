@@ -13,7 +13,7 @@ export class Woman {
             this.currWoman = curr.value;
             this.render();
         } else {
-            alert ('game over');
+            document.dispatchEvent(new Event("dayEnd"));
         }
     }
     render(){

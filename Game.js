@@ -5,7 +5,8 @@ import{womanAnimationStatus, switchBrightness, playerAnimationStatus,setWomanAni
 
 
 let start = () => {
-
+    const brushAudio = new Audio("./assets/audio/Human Teeth Brushing Teeth Long Strokes 01.wav")
+    const sayYes = new Audio("./assets/audio/Human Female Yes 03.wav")
     let woman = new Woman();
     let dialogue = new Dialogue(woman.currWoman.dialogue);
     let inputList = [];
@@ -32,20 +33,27 @@ let start = () => {
             })
             if (isCovered) {
                 let coordinate = `${areaMap[i].row}${areaMap[i].col}`;
-                if (suspendDialogue) return;
+                if (suspendDialogue) {
+                    brushAudio.pause();
+                    return;
+                }
                 if (dirtState[coordinate]){
-    
+                    brushAudio.play();
+                    setTimeout(() => { brushAudio.pause(); brushAudio.currentTime = 0; }, 1000);
                     document.getElementById(coordinate).style.opacity = 0;
                     setPlayerAnimation(playerAnimationStatus.animation);
                     dirtState[coordinate] = false;
                     dialogue.next();
-                  }
+                }
               
             }
         }
     }
     
     let handleDialogueEnd = () => {
+        sayYes.play();
+        brushAudio.pause();
+        
         setWomanAnimation(womanAnimationStatus.leave);
         setTimeout(()=>{
             switchBrightness(0);
@@ -91,7 +99,6 @@ let start = () => {
         }
     }
     
-    
     let setCoin = () => {
         document.getElementById('coin').innerText = coin;
     }
@@ -112,6 +119,8 @@ let start = () => {
         overlay.innerText = 
         `Thanks for playing!
         You totally have ${coin} coins now.
+        You can spend 20$ to upgrade your srubbing towel.
+        You still need 100$ to buy an automatic scrubbing machine.
         `
         document.getElementById("container").appendChild(overlay);
 }) 

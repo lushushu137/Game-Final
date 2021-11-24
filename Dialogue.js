@@ -21,7 +21,8 @@ export class Dialogue {
         this.begin();
         this.endEvent = new Event("isEnd");
         this.suspendEvent = new Event("isSuspendDialogue");
-        this.curr = dialogueList.next[0]
+        this.curr = dialogueList.next[0];
+
     }
     begin(){
         let getBegin = setInterval(()=> {
@@ -63,11 +64,14 @@ export class Dialogue {
             }, 1000)
     }
     renderChoices(choice1, choice2){
+        const coin = new Audio("./assets/audio/coin.wav");
+        const cough = new Audio("./assets/audio/Human Female Cough Short Cough 01.wav")
+        cough.play()
         setPlayerAnimation(playerAnimationStatus.stop);
         let choice1Div = document.createElement('button');
         let choice2Div = document.createElement('button');
         let choices = document.createElement('div');
-
+        
         choice1Div.id = "choice1"
         choice1Div.innerText = choice1.content;
         
@@ -76,10 +80,12 @@ export class Dialogue {
         
         choice1Div.addEventListener("click", () => {
             choice1Div.innerText = choice1.coin;
+            coin.play()
             document.dispatchEvent(new CustomEvent("clickChoice", {"detail":choice1.coin}));
             setTimeout(()=>this.remove('player'), 500);
         })
         choice2Div.addEventListener("click", () => {
+            coin.play()
             choice2Div.innerText = choice2.coin;
             document.dispatchEvent(new CustomEvent("clickChoice", {"detail":choice2.coin}));
             setTimeout(()=>this.remove('player'), 500);

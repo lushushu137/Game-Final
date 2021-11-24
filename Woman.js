@@ -3,13 +3,17 @@ import { aliceDialogueMap, susanDialogueMap, carolineDialogueMap} from './allDia
 export class Woman {
     womanIterator = iterator(womanList);
     currWoman;
+    emmm;
     constructor(){
         this.currWoman = this.womanIterator.next().value;
         this.render();
+        this.emmm = new Audio("./assets/audio/Human Female Mmm 01.wav")
+        this.emmm.play()
     }
     next() {
         let curr = this.womanIterator.next();
         if (!curr.done) {
+            this.emmm.play()
             this.currWoman = curr.value;
             this.render();
         } else {

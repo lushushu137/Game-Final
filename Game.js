@@ -1,17 +1,17 @@
 import { Woman } from "./Woman.js";
-import { KeyboardToAreaList } from "./KeyboardToAreaList.js";
+import { KeyboardToAreaList, KeyboardToAreaList2 } from "./KeyboardToAreaList.js";
 import {Dialogue} from './Dialogue.js';
+import{womanAnimationStatus, playerAnimationStatus,setWomanAnimation, setPlayerAnimation} from './animationControl.js';
 
 // let scrubber = new Scrubber();
 let woman = new Woman();
-console.log(woman)
 let dialogue = new Dialogue(woman.currWoman.dialogue);
 let inputList = [];
 let start = 0;
-let playerAnimationStatus = {
-    stop: 'url(/assets/player.png)',
-    animation: 'url(/assets/player.gif)'
-}
+let coin = 0;
+let suspendDialogue = false;
+
+
 let dirtState = {
     "00": true,
     "01":true,
@@ -25,41 +25,34 @@ let dirtState = {
 }
 
 let clearArea = (inputList) => {
-    for (let i = 0; i < KeyboardToAreaList.length; i++) {
-        let isCovered = KeyboardToAreaList[i].keys.every((curr) => {
+    let areaMap = KeyboardToAreaList;
+    for (let i = 0; i < areaMap.length; i++) {
+        let isCovered = areaMap[i].keys.every((curr) => {
             return inputList.includes(curr);
         })
         if (isCovered) {
-            let coordinate = `${KeyboardToAreaList[i].row}${KeyboardToAreaList[i].col}`;
-            if (dirtState[coordinate]) {
-                // remove dirt view
-                document.getElementById(coordinate).style.opacity = 0;
-                // animate charactor
-                setPlayerAnimation(playerAnimationStatus.animation);
-                dirtState[coordinate] = false;
-                dialogue.next();
-                if (Object.keys(dirtState).every(d => dirtState[d] === false)) {
-                    handleDirtEnd();
-                }
-            }
+            let coordinate = `${areaMap[i].row}${areaMap[i].col}`;
+            if (!dirtState[coordinate]) return;
+            if (suspendDialogue) return;
+            document.getElementById(coordinate).style.opacity = 0;
+            setPlayerAnimation(playerAnimationStatus.animation);
+            dirtState[coordinate] = false;
+            dialogue.next();
         }
     }
 }
 
-let handleDirtEnd = () => {
-    setPlayerAnimation(playerAnimationStatus.stop);
-}
 let handleDialogueEnd = () => {
-    switchBrightness(0);
+    setWomanAnimation(womanAnimationStatus.leave);
+    setTimeout(()=>{
+        switchBrightness(0);
+    }, 1000)
     setTimeout(() => {
-        switchBrightness(1);
-      setTimeout(()=>{
-        resetDirt();
         nextWoman();
-      }, 1000)
-    }, 2000)
+    }, 3000)
  
 }
+
 
 let switchBrightness = (value) => {
     document.getElementById('container').style.filter = `brightness(${value})`;
@@ -74,13 +67,14 @@ let resetDirt = () => {
 }
 
 
-let setPlayerAnimation = (status) => {
-    document.getElementById("player").style.backgroundImage = status;
-}
-
 let nextWoman = () => {
-    woman.next();
-    dialogue = new Dialogue(woman.currWoman.dialogue)
+    switchBrightness(1);
+    setWomanAnimation(womanAnimationStatus.lying);
+    setTimeout(()=>{
+        resetDirt();
+        woman.next();
+        dialogue = new Dialogue(woman.currWoman.dialogue)
+    }, 2000)
 }
 
 let checkScroll = () => {
@@ -98,5 +92,16 @@ let checkScroll = () => {
 }
 
 checkScroll();
+setWomanAnimation(womanAnimationStatus.lying);
 
 document.addEventListener("isEnd", handleDialogueEnd)
+document.addEventListener("isSuspendDialogue", () => suspendDialogue = true)
+document.addEventListener("clickChoice", (e)=>{
+    suspendDialogue = false;
+    coin += e.detail
+    setCoin();
+})
+
+let setCoin = () => {
+    document.getElementById('coin').innerText = coin;
+}

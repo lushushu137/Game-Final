@@ -120,8 +120,20 @@ export const carolineDialogueMap = {
         },
         {
             character: 'player',
-            content: 'Narcissistic.',
-            order: 8
+            content: '',
+            order: 8, 
+            options: {
+                choice1: {
+                    content: 'Narcissistic.',
+                    coin: 20,
+                    to: 5
+                },
+                choice2: {
+                    content:'Cute.',
+                    coin: 5,
+                    to:6
+                }
+            } 
         },
         {
             character: 'guest',
@@ -154,54 +166,88 @@ export const susanDialogueMap = {
         {
             character: 'guest',
             content: 'Harder, please.',
-            order: 0
+            id: 0,
+            to: 1
         },
         {
             character: 'player',
             content: 'Ok. Susan',
-            order: 1
+            id: 1,
+            to: 2
         },
     ],
     next: [
         {
             character: 'player',
             content: 'How\'s everything going?',
-            order: 2
+            id: 2,
+            to:3,
+            
         },
         {
             character: 'guest',
             content: 'Fantastic. I think my husband is having an affair.',
-            order: 3
+            id: 3,
+            to:4,
+            options: {
+                choice1: {
+                    content: 'Narcissistic.',
+                    coin: 20,
+                    to: 5
+                },
+                choice2: {
+                    content:'Cute.',
+                    coin: 5,
+                    to:6
+                }
+            } 
         },
         {
             character: 'player',
             content: 'Wait, what?',
-            order: 4
+            id: 4,
+            to: 7,
         },
         {
             character: 'guest',
-            content: 'Yeah, but no big deal. Our kids will enter the college next year. We can divorce without too much worries then. I\'ve put up with it long enough.',
-            order: 5
+            content: 'Yeah, but no big deal. Our kids will enter the college to year. We can divorce without too much worries then. I\'ve put up with it long enough.',
+            id: 5,
+            to:7
         },
         {
             character: 'player',
-            content: 'Sounds good.',
-            order: 6
+            content: '',
+            id: 6,
+            to:7,
+            options: {
+                choice1: {
+                    content: 'Sounds good.',
+                    coin: 20,
+                    to: 5
+                },
+                choice2: {
+                    content:'Sounds sad.',
+                    coin: 5,
+                    to:6
+                }
+            } 
         },
         {
             character: 'guest',
             content: 'Meaning of marriage is overestimated. Women at my age all agree with it.',
-            order: 7
+            id: 7,
+            to:8
         },
         {
             character: 'player',
             content: 'Sounds radical. I still can\'t deny the neccesity for marriage now.',
-            order: 8
+            id: 8,
+            to:9
         },
         {
             character: 'guest',
             content: 'You will when you are older.',
-            order: 9
+            id: 9,
         },
     ],
     end: [
@@ -210,17 +256,19 @@ export const susanDialogueMap = {
         {
             character: 'player',
             content: 'Finished.',
-            order: 10
+            id: 10,
+            to:11
         },
         {
             character: 'guest',
             content: 'Bye. ',
-            order: 11
+            id: 11,
+            to:12
         },
         {
             character: 'player',
             content: 'Bye. ',
-            order: 12
+            id: 12
         },
     ],
 }

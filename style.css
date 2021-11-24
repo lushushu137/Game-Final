@@ -102,7 +102,29 @@ body {
   right: 80px;
   top: 200px;
 }
-
+#coin {
+  width: 100px;
+  height: 40px;
+  right: 0;
+  position: absolute;
+  z-index: 10;
+  text-align: right;
+  line-height: 40px;
+  font-size: 30px;
+  top: 20px;
+  right: 50px;
+}
+#coin::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  z-index: 10;
+  height: 40px;
+  width: 40px;
+  background-image: url("./assets/coin.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 #dialogue_player,
 #dialogue_guest {
   padding: 5px 10px;
@@ -148,6 +170,27 @@ body {
   border-bottom: 8px solid black;
 }
 
+#choices {
+  border: solid 1px;
+}
+
+#choice1,
+#choice2 {
+  display: block;
+  margin: 5px;
+  border: solid 1px;
+  padding: 3px 5px;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+#choice1:active,
+#choice2:active {
+  background-color: white;
+  color: black;
+}
+
 #grid {
   width: 249px;
   height: 300px;
@@ -171,7 +214,7 @@ body {
   height: 300px;
   position: absolute;
   color: rgba(134, 32, 0, 0);
-  transition: opacity 0.5s linear;
+  /* transition: opacity 0.5s linear; */
   filter: brightness(
     1.5
   ); /* background-image: url("./assets/dirt.png");

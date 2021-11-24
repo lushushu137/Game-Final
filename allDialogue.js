@@ -189,18 +189,6 @@ export const susanDialogueMap = {
             content: 'Fantastic. I think my husband is having an affair.',
             id: 3,
             to:4,
-            options: {
-                choice1: {
-                    content: 'Narcissistic.',
-                    coin: 20,
-                    to: 5
-                },
-                choice2: {
-                    content:'Cute.',
-                    coin: 5,
-                    to:6
-                }
-            } 
         },
         {
             character: 'player',

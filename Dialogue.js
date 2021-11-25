@@ -66,6 +66,8 @@ export class Dialogue {
     renderChoices(choice1, choice2){
         const coin = new Audio("./assets/audio/coin.wav");
         const cough = new Audio("./assets/audio/Human Female Cough Short Cough 01.wav")
+        coin.volume = 0.8
+        cough.volume = 0.8
         cough.play()
         setPlayerAnimation(playerAnimationStatus.stop);
         let choice1Div = document.createElement('button');
@@ -79,14 +81,14 @@ export class Dialogue {
         choice2Div.innerText = choice2.content;
         
         choice1Div.addEventListener("click", () => {
-            choice1Div.innerText = choice1.coin;
+            choice1Div.innerText = `+${choice1.coin}$`;
             coin.play()
             document.dispatchEvent(new CustomEvent("clickChoice", {"detail":choice1.coin}));
             setTimeout(()=>this.remove('player'), 500);
         })
         choice2Div.addEventListener("click", () => {
             coin.play()
-            choice2Div.innerText = choice2.coin;
+            choice2Div.innerText = `+${choice2.coin}$`;
             document.dispatchEvent(new CustomEvent("clickChoice", {"detail":choice2.coin}));
             setTimeout(()=>this.remove('player'), 500);
         })

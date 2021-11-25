@@ -44,8 +44,20 @@ export const aliceDialogueMap = {
         },
         {
             character: 'player',
-            content: 'Interesting.',
-            order: 8
+            content: '',
+            order: 8,
+            options:{
+                choice1: {
+                    content: 'Interesting.',
+                    coin: 20,
+                    to: 5
+                },
+                choice2: {
+                    content:'Naive.',
+                    coin: 5,
+                    to:6
+                }
+            } 
         },
         {
             character: 'guest',

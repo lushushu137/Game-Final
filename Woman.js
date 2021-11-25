@@ -8,6 +8,7 @@ export class Woman {
         this.currWoman = this.womanIterator.next().value;
         this.render();
         this.emmm = new Audio("./assets/audio/Human Female Mmm 01.wav")
+        this.emmm.volume = 0.2
         this.emmm.play()
     }
     next() {

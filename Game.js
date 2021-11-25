@@ -3,16 +3,18 @@ import { KeyboardToAreaList, KeyboardToAreaList2 } from "./KeyboardToAreaList.js
 import {Dialogue} from './Dialogue.js';
 import{womanAnimationStatus, switchBrightness, playerAnimationStatus,setWomanAnimation, setPlayerAnimation} from './animationControl.js';
 
+let inputList = [];
 
 let start = () => {
     const brushAudio = new Audio("./assets/audio/Human Teeth Brushing Teeth Long Strokes 01.wav")
     const sayYes = new Audio("./assets/audio/Human Female Yes 03.wav")
+    const ambience = new Audio("./assets/audio/ambience.mp3")
+    const ending = new Audio("./assets/audio/Merry-Bay-Upbeat-Summer-Lofi.mp3")
+    ambience.play();
     let woman = new Woman();
     let dialogue = new Dialogue(woman.currWoman.dialogue);
-    let inputList = [];
     let coin = 0;
     let suspendDialogue = false;
-
     let dirtState = {
         "00": true,
         "01":true,
@@ -32,6 +34,7 @@ let start = () => {
                 return inputList.includes(curr);
             })
             if (isCovered) {
+                document.dispatchEvent(new Event("scrolling"));
                 let coordinate = `${areaMap[i].row}${areaMap[i].col}`;
                 if (suspendDialogue) {
                     brushAudio.pause();
@@ -83,27 +86,13 @@ let start = () => {
         switchBrightness(1);
         setWomanAnimation(womanAnimationStatus.lying);
     }
-    
-    let checkScroll = () => {
-        let start = new Date().getTime();
-        document.onkeydown = (e) => {
-            let current = new Date().getTime();
-            if (current - start < 1000) {
-                inputList.push(e.code);
-            } else  {
-                inputList = [];
-                inputList.push(e.code);
-            }
-            start = current;
-            clearArea(inputList);
-        }
-    }
+
     
     let setCoin = () => {
         document.getElementById('coin').innerText = coin;
     }
     
-    checkScroll();
+    setTimeout(()=>checkScroll(clearArea),1000);
     setWomanAnimation(womanAnimationStatus.lying);
     document.addEventListener("isEnd", handleDialogueEnd)
     document.addEventListener("isSuspendDialogue", () => suspendDialogue = true)
@@ -117,21 +106,43 @@ let start = () => {
         let overlay = document.createElement('div');
         overlay.id = "overlay";
         overlay.innerText = 
-        `Thanks for playing!
-        You totally have ${coin} coins now.
+        `Day 1 - You totally have ${coin} coins now.
         You can spend 20$ to upgrade your srubbing towel.
         You still need 100$ to buy an automatic scrubbing machine.
+        
+        scrub to next day ->
         `
         document.getElementById("container").appendChild(overlay);
+        ambience.pause();
+        setTimeout(()=>ending.play(), 500)
 }) 
 }
+    
+let checkScroll = (fn) => {
+    let start = new Date().getTime();
+    console.log(inputList)
+    document.onkeydown = (e) => {
+        let current = new Date().getTime();
+        if (current - start < 1000) {
+            inputList.push(e.code);
+        } else  {
+            inputList = [];
+            inputList.push(e.code);
+        }
+        start = current;
+        fn(inputList);
+    }
+}
 
-
-
-window.onload = () => {
-    document.getElementById('startButton').addEventListener('click', ()=>{
-        document.getElementById('container').removeChild(document.getElementById('overlay'))
+let scrubToStart = (inputList) => {
+    if (inputList.length > 6){
+        let overlay = document.getElementById('overlay');
+        overlay ? document.getElementById('container').removeChild(document.getElementById('overlay')) : null;
         switchBrightness(1);
         start();
-    })
+    }
+}
+
+window.onload = () => {
+        checkScroll(scrubToStart);
 }

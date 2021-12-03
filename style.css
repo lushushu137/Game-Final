@@ -100,7 +100,6 @@ h1 {
   z-index: 1;
 }
 #woman {
-  /* background-image: url("assets/beauty.png"); */
   z-index: 0;
 }
 
@@ -113,7 +112,6 @@ h1 {
   z-index: 5;
 }
 #guest {
-  /* background-image: url("assets/guest.png"); */
   z-index: 4;
 }
 #player {

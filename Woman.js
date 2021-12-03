@@ -3,6 +3,7 @@ import {
   susanDialogueMap,
   carolineDialogueMap,
 } from "./allDialogue.js";
+import { getUrl } from "./animationControl.js";
 
 export class Woman {
   womanIterator = iterator(womanList);
@@ -27,7 +28,7 @@ export class Woman {
   }
   render() {
     let womanDiv = document.getElementById("woman");
-    womanDiv.style.backgroundImage = `url(./assets/${this.currWoman.type}.png)`;
+    womanDiv.style.backgroundImage = getUrl(this.currWoman.imgUrl);
     womanDiv.style.zIndex = 0;
   }
 }
@@ -41,15 +42,18 @@ const womanList = [
     name: "Susan",
     type: "old",
     dialogue: susanDialogueMap,
+    imgUrl: "/assets/old.png",
   },
   {
     name: "Alice",
     type: "young",
     dialogue: aliceDialogueMap,
+    imgUrl: "/assets/young.png",
   },
   {
     name: "Caroline",
     type: "beauty",
     dialogue: carolineDialogueMap,
+    imgUrl: "/assets/beauty.png",
   },
 ];

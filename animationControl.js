@@ -1,7 +1,9 @@
-let currOrigin = document.location.origin;
+let currOrigin = document.location.href;
 
 export let getUrl = (url) => {
-  return `url(${currOrigin}${url})`;
+  let parsedUrl =
+    url[0] === "/" ? url.slice(1) : url[0] === "." ? url.slice(2) : url;
+  return `url(${currOrigin}${parsedUrl})`;
 };
 
 export let womanAnimationStatus = {
@@ -14,19 +16,12 @@ export let playerAnimationStatus = {
 };
 
 export let setWomanAnimation = (movement) => {
-  document.getElementById(
-    "guest"
-  ).style.backgroundImage = `url(${currOrigin}${movement})`;
-  console.log(
-    "setWomanAnimation backgroundImage:",
-    `url(${currOrigin}${movement})`
-  );
+  document.getElementById("guest").style.backgroundImage = getUrl(movement);
+  console.log("setWomanAnimation backgroundImage:", getUrl(movement));
 };
 
 export let setPlayerAnimation = (status) => {
-  document.getElementById(
-    "player"
-  ).style.backgroundImage = `url(${currOrigin}${status})`;
+  document.getElementById("player").style.backgroundImage = getUrl(status);
 };
 
 export let switchBrightness = (value) => {

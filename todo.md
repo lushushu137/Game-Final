@@ -1,4 +1,4 @@
-- audio
+- audio √
 - ui
-- tutorial
+- tutorial √
 - dirt effect

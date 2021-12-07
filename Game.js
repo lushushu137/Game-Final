@@ -13,7 +13,19 @@ const ending = new Audio("./assets/audio/Merry-Bay-Upbeat-Summer-Lofi.mp3");
 let coin = 0;
 let disableStart = false;
 
+let handleDialogueEnd = null;
+let handleDayEnd = null;
+let handleIsSuspendDialogue = null;
+let handleClickChoice = null;
+
 let start = () => {
+  handleDialogueEnd && document.removeEventListener("dayEnd", handleDayEnd);
+  handleDialogueEnd &&
+    document.removeEventListener("dialogueEnd", handleDialogueEnd);
+  handleIsSuspendDialogue &&
+    document.removeEventListener("isSuspendDialogue", handleIsSuspendDialogue);
+  handleClickChoice &&
+    document.removeEventListener("clickChoice", handleClickChoice);
   console.log("start");
   ambience.play();
   let woman = new Woman();
@@ -33,8 +45,7 @@ let start = () => {
       }
     }
   };
-  let handleDialogueEnd = () => {
-    document.removeEventListener("dialogueEnd", handleDialogueEnd);
+  handleDialogueEnd = () => {
     sayYes.play();
     setWomanAnimation(womanAnimationStatus.leave);
     setTimeout(() => {
@@ -45,8 +56,7 @@ let start = () => {
       switchBrightness(1);
     }, 3000);
   };
-  let handleDayEnd = () => {
-    document.removeEventListener("dayEnd", handleDayEnd);
+  handleDayEnd = () => {
     console.log("dayend");
     let overlay = document.createElement("div");
     overlay.id = "overlay";
@@ -63,15 +73,15 @@ let start = () => {
     checkScroll((inputList) => {
       woman = null;
       ending.pause();
+      console.log("scroll to next day");
+
       scrubToStart(inputList);
     });
   };
-  let handleIsSuspendDialogue = () => {
-    document.removeEventListener("isSuspendDialogue", handleIsSuspendDialogue);
+  handleIsSuspendDialogue = () => {
     suspendDialogue = true;
   };
-  let handleClickChoice = (e) => {
-    document.removeEventListener("clickChoice", handleClickChoice);
+  handleClickChoice = (e) => {
     console.log("clickChoice and e.detail: ", e.detail);
     suspendDialogue = false;
     coin += e.detail;
@@ -82,6 +92,7 @@ let start = () => {
   };
 
   setTimeout(() => checkScroll(clearArea), 1000);
+
   document.addEventListener("dayEnd", handleDayEnd);
   document.addEventListener("dialogueEnd", handleDialogueEnd);
   document.addEventListener("isSuspendDialogue", handleIsSuspendDialogue);

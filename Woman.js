@@ -98,16 +98,16 @@ const womanList = [
     dialogue: susanDialogueMap,
     imgUrl: "/assets/old.png",
   },
-  {
-    name: "Alice",
-    type: "young",
-    dialogue: aliceDialogueMap,
-    imgUrl: "/assets/young.png",
-  },
-  {
-    name: "Caroline",
-    type: "beauty",
-    dialogue: carolineDialogueMap,
-    imgUrl: "/assets/beauty.png",
-  },
+  // {
+  //   name: "Alice",
+  //   type: "young",
+  //   dialogue: aliceDialogueMap,
+  //   imgUrl: "/assets/young.png",
+  // },
+  // {
+  //   name: "Caroline",
+  //   type: "beauty",
+  //   dialogue: carolineDialogueMap,
+  //   imgUrl: "/assets/beauty.png",
+  // },
 ];

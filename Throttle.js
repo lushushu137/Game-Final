@@ -4,7 +4,7 @@ export let throttle = (fn) => {
     if (canRun) {
       fn.apply(this, arguments);
       canRun = false;
-      setTimeout(() => (canRun = true), 1000);
+      setTimeout(() => (canRun = true), 800);
     }
   };
 };

@@ -30,7 +30,7 @@ export const aliceDialogueMap1 = {
     },
     {
       character: "guest",
-      content: "Whatever. I hate it. My face is ruined.",
+      content: "Whatever. I hate it. Acne ruins my high school.",
       order: 5,
     },
     {
@@ -54,7 +54,7 @@ export const aliceDialogueMap1 = {
           to: 5,
         },
         choice2: {
-          content: "Come on, I've been there.",
+          content: "It's just acne.",
           coin: 5,
           to: 6,
         },
@@ -62,7 +62,7 @@ export const aliceDialogueMap1 = {
     },
     {
       character: "guest",
-      content: "There is much you don't know. ",
+      content: "There are much you don't know. ",
       order: 9,
     },
   ],
@@ -117,7 +117,7 @@ export const carolineDialogueMap1 = {
     },
     {
       character: "guest",
-      content: "(laugh) I don't think a rose tattoo can be that scary.",
+      content: "Haha, I don't think a rose tattoo can be that scary.",
       order: 5,
     },
     {
@@ -234,19 +234,19 @@ export const susanDialogueMap1 = {
     {
       character: "guest",
       content:
-        "'Women explore for eternity in the vast garden of sacrifice.'. Have you heared about this quote?",
+        '"Women explore for eternity in the vast garden of sacrifice". Have you heared about this quote?',
       id: 7,
       to: 8,
     },
     {
       character: "player",
-      content: "Before Midnight?",
+      content: "《Before Midnight》?",
       id: 8,
       to: 9,
     },
     {
       character: "guest",
-      content: "You got it. I'm gonna be free.",
+      content: "You got it. Time for my own life.",
       id: 9,
     },
   ],
@@ -305,7 +305,7 @@ export const weiliDialogueMap1 = {
       content: "",
       options: {
         choice1: {
-          content: "Don't be too nervous. You got this.",
+          content: "Don't be nervous. You got this.",
           coin: 5,
         },
         choice2: {
@@ -331,7 +331,7 @@ export const weiliDialogueMap1 = {
   end: [
     {
       character: "player",
-      content: "Finished. Good luck for the contest.",
+      content: "Finished. Good luck for tomorrow.",
     },
     {
       character: "guest",

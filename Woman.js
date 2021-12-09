@@ -96,15 +96,15 @@ function* iterator(list, day) {
 }
 const womanList = [
   {
-    name: "Susan",
-    dialogue: susanDialogueMap1,
-    imgUrl: "/assets/susan.png",
-    day: 1,
-  },
-  {
     name: "Alice",
     dialogue: aliceDialogueMap1,
     imgUrl: "/assets/alice.png",
+    day: 1,
+  },
+  {
+    name: "Susan",
+    dialogue: susanDialogueMap1,
+    imgUrl: "/assets/susan.png",
     day: 1,
   },
   {

@@ -112,6 +112,7 @@ let checkScroll = (fn) => {
   let start = new Date().getTime();
   let inputList = [];
   document.onkeydown = (e) => {
+    e.returnValue = false;
     let current = new Date().getTime();
     if (current - start < 500) {
       inputList.push(e.code);

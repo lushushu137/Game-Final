@@ -343,3 +343,45 @@ export const weiliDialogueMap1 = {
     },
   ],
 };
+
+export const amyDialogueMap1 = {
+  begin: [
+    {
+      character: "guest",
+      content: "Harder, please.",
+    },
+    {
+      character: "player",
+      content: "Wait, is that a boy?",
+    },
+    {
+      character: "guest",
+      content: "He is just six.",
+    },
+    {
+      character: "player",
+      content: "Where is his father? He can't be here.",
+    },
+    {
+      character: "guest",
+      content: "Come on, he knows nothing. Boy needs his mom.",
+    },
+    {
+      character: "player",
+      content: "No. Rule is rule.",
+    },
+  ],
+  next: [],
+  end: [
+    {
+      character: "guest",
+      content: "Fine. Let's go.",
+      order: 11,
+    },
+    {
+      character: "player",
+      content: "Bye. ",
+      order: 12,
+    },
+  ],
+};

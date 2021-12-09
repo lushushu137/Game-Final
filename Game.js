@@ -7,7 +7,6 @@ import {
   setWomanAnimation,
 } from "./animationControl.js";
 
-const sayYes = new Audio("./assets/audio/Human Female Yes 03.wav");
 const ambience = new Audio("./assets/audio/ambience.mp3");
 const ending = new Audio("./assets/audio/Merry-Bay-Upbeat-Summer-Lofi.mp3");
 ending.volume = 0.3;
@@ -29,6 +28,7 @@ let start = () => {
     document.removeEventListener("isSuspendDialogue", handleIsSuspendDialogue);
   handleClickChoice &&
     document.removeEventListener("clickChoice", handleClickChoice);
+
   console.log("start");
   ambience.play();
   let woman = new Woman(day);
@@ -37,6 +37,7 @@ let start = () => {
     woman.removeDirt(coordinate);
   });
   let clearArea = (inputList) => {
+    console.log("suspendDialogue:", suspendDialogue);
     if (suspendDialogue) return;
     let areaMap = KeyboardToAreaList;
     for (let i = 0; i < areaMap.length; i++) {
@@ -49,7 +50,7 @@ let start = () => {
     }
   };
   handleDialogueEnd = () => {
-    sayYes.play();
+    suspendDialogue = false;
     setWomanAnimation(womanAnimationStatus.leave);
     setTimeout(() => {
       switchBrightness(0);
@@ -100,12 +101,11 @@ let start = () => {
     document.getElementById("coin").innerText = coin;
   };
 
-  setTimeout(() => checkScroll(clearArea), 1000);
-
   document.addEventListener("dayEnd", handleDayEnd);
   document.addEventListener("dialogueEnd", handleDialogueEnd);
   document.addEventListener("isSuspendDialogue", handleIsSuspendDialogue);
   document.addEventListener("clickChoice", handleClickChoice);
+  setTimeout(() => checkScroll(clearArea), 1000);
 };
 
 let checkScroll = (fn) => {

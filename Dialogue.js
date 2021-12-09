@@ -7,23 +7,49 @@ function* iterator(dialogueList) {
     yield item;
   }
 }
-
+const sayYes = new Audio("./assets/audio/Human Female Yes 03.wav");
+const sayNo = new Audio("./assets/audio/Human Male No Whinny No 01.wav");
+sayNo.volume = 0.2;
 export class Dialogue {
   dialogueList;
   beginIterator;
   nextIterator;
   endIterator;
   curr;
-  constructor(dialogueList) {
+  constructor(dialogueList, beginType = "normal") {
     this.dialogueList = dialogueList;
     this.beginIterator = iterator(dialogueList.begin);
     this.nextIterator = iterator(dialogueList.next);
     this.iterator = iterator(dialogueList.end);
-    this.begin();
-    this.suspendEvent = new Event("isSuspendDialogue");
+    if (beginType === "normal") {
+      this.begin();
+    } else if (beginType === "onlyTalk") {
+      this.onlyTalk();
+    }
+
     this.curr = dialogueList.next[0];
   }
+
+  onlyTalk() {
+    document.dispatchEvent(new Event("isSuspendDialogue"));
+    console.log("enter onlyTalk");
+    let getBegin = setInterval(() => {
+      let curr = this.beginIterator.next();
+      console.log(curr.value);
+      if (!curr.done) {
+        this.render(curr.value.character, curr.value.content);
+      } else {
+        clearInterval(getBegin);
+        document.getElementById(`dialogue_player`).style.opacity = 0;
+        document.getElementById(`dialogue_guest`).style.opacity = 0;
+        document.dispatchEvent(new Event("dialogueEnd"));
+        sayNo.play();
+      }
+    }, 2000);
+  }
+
   begin() {
+    console.log("enter begin");
     let getBegin = setInterval(() => {
       let curr = this.beginIterator.next();
       if (!curr.done) {
@@ -41,7 +67,7 @@ export class Dialogue {
     if (!curr.done) {
       this.render(curr.value.character, curr.value.content);
       if (curr.value.options) {
-        document.dispatchEvent(this.suspendEvent);
+        document.dispatchEvent(new Event("isSuspendDialogue"));
         this.renderChoices(
           curr.value.options.choice1,
           curr.value.options.choice2
@@ -63,11 +89,11 @@ export class Dialogue {
         document.getElementById(`dialogue_player`).style.opacity = 0;
         document.getElementById(`dialogue_guest`).style.opacity = 0;
         document.dispatchEvent(new Event("dialogueEnd"));
+        sayYes.play();
       }
     }, 1000);
   }
   renderChoices(choice1, choice2) {
-    console.log("renderChoices");
     const coin = new Audio("./assets/audio/coin.wav");
     const cough = new Audio(
       "./assets/audio/Human Female Cough Short Cough 01.wav"

@@ -3,6 +3,7 @@ import {
   susanDialogueMap1,
   weiliDialogueMap1,
   carolineDialogueMap1,
+  amyDialogueMap1,
 } from "./allDialogue.js";
 import { Dialogue } from "./Dialogue.js";
 import {
@@ -37,10 +38,14 @@ export class Woman {
     this.render();
     this.emmm = new Audio("./assets/audio/Human Female Mmm 01.wav");
     this.emmm.volume = 0.2;
-    this.dialogue = new Dialogue(this.currWoman.dialogue);
     this.emmm.play();
     this.resetDirt();
     setWomanAnimation(womanAnimationStatus.lying);
+    // if (this.currWoman.name === "Amy") {
+    //   this.dialogue = new Dialogue(this.currWoman.dialogue, "onlyTalk");
+    // } else {
+    this.dialogue = new Dialogue(this.currWoman.dialogue);
+    // }
   }
   next() {
     let curr = this.womanIterator.next();
@@ -49,7 +54,11 @@ export class Woman {
       this.resetDirt();
       this.emmm.play();
       this.currWoman = curr.value;
-      this.dialogue = new Dialogue(this.currWoman.dialogue);
+      if (this.currWoman.name === "Amy") {
+        this.dialogue = new Dialogue(this.currWoman.dialogue, "onlyTalk");
+      } else {
+        this.dialogue = new Dialogue(this.currWoman.dialogue);
+      }
       this.render();
     } else {
       document.dispatchEvent(new Event("dayEnd"));
@@ -57,7 +66,6 @@ export class Woman {
   }
 
   removeDirt(coordinate) {
-    console.log("coordinate:", coordinate);
     if (this.dirtState[coordinate] > 0) {
       brushAudio.play();
       setTimeout(() => {
@@ -101,6 +109,7 @@ const womanList = [
     imgUrl: "/assets/alice.png",
     day: 1,
   },
+
   {
     name: "Susan",
     dialogue: susanDialogueMap1,
@@ -111,6 +120,12 @@ const womanList = [
     name: "Caroline",
     dialogue: carolineDialogueMap1,
     imgUrl: "/assets/caroline.png",
+    day: 2,
+  },
+  {
+    name: "Amy",
+    dialogue: amyDialogueMap1,
+    imgUrl: "/assets/amy.jpg",
     day: 2,
   },
   {

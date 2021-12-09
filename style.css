@@ -7,16 +7,28 @@ body {
   text-align: center;
   font-size: 20px;
 }
-h1 {
-  margin-top: 20px;
+a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
+  color: black;
 }
-#container {
+h1 {
+  /* margin-top: 20px; */
+}
+#game_area {
   width: 100vw;
   height: 100vh;
 }
-
+#intro_area {
+  padding: 100px 300px;
+}
 #overlay {
-  background-color: black;
+  background: url("./assets/border.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   width: 960px;
   height: 720px;
   position: absolute;
@@ -24,8 +36,7 @@ h1 {
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  font-size: 50px;
-  color: #fff;
+  font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -246,17 +257,9 @@ h1 {
 }
 
 .row {
-  /* border: solid 1px; */
-  /* flex-grow: 1; */
   width: 249px;
   height: 300px;
   position: absolute;
   color: rgba(134, 32, 0, 0);
-  /* transition: opacity 0.5s linear; */
-  filter: brightness(
-    1.5
-  ); /* background-image: url("./assets/dirt.png");
-  
-  background-size: 50px;
-  background-repeat: no-repeat; */
+  filter: brightness(1.5);
 }

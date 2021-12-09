@@ -10,8 +10,10 @@ import {
 const sayYes = new Audio("./assets/audio/Human Female Yes 03.wav");
 const ambience = new Audio("./assets/audio/ambience.mp3");
 const ending = new Audio("./assets/audio/Merry-Bay-Upbeat-Summer-Lofi.mp3");
+ending.volume = 0.3;
 let coin = 0;
 let disableStart = false;
+let day = 0;
 
 let handleDialogueEnd = null;
 let handleDayEnd = null;
@@ -19,6 +21,7 @@ let handleIsSuspendDialogue = null;
 let handleClickChoice = null;
 
 let start = () => {
+  day++;
   handleDialogueEnd && document.removeEventListener("dayEnd", handleDayEnd);
   handleDialogueEnd &&
     document.removeEventListener("dialogueEnd", handleDialogueEnd);
@@ -28,7 +31,7 @@ let start = () => {
     document.removeEventListener("clickChoice", handleClickChoice);
   console.log("start");
   ambience.play();
-  let woman = new Woman();
+  let woman = new Woman(day);
   let suspendDialogue = false;
   let throttleRemoveDirt = throttle((coordinate) => {
     woman.removeDirt(coordinate);
@@ -57,26 +60,32 @@ let start = () => {
     }, 3000);
   };
   handleDayEnd = () => {
-    console.log("dayend");
     let overlay = document.createElement("div");
     overlay.id = "overlay";
-    overlay.innerText = `Day 1 - You totally have ${coin} coins now.
-          You can spend 20$ to upgrade your srubbing towel.
-          You still need 100$ to buy an automatic scrubbing machine.
-          
-          scrub to next day ->
-          `;
-    document.getElementById("container").appendChild(overlay);
-    ambience.pause();
-    disableStart = false;
-    setTimeout(() => ending.play(), 500);
-    checkScroll((inputList) => {
-      woman = null;
-      ending.pause();
-      console.log("scroll to next day");
-
-      scrubToStart(inputList);
-    });
+    if (day >= 2) {
+      overlay.innerHTML = `<h1>Day ${day} - You totally have ${coin} coins now.</h1>
+      <p>Because of limited time, I have only made these contents and there are many shortcomings.</p>
+      <p>If you want to discuss with me, please send me email.</p>
+      <p>Thank you for playing here!</p>
+      <a href='https://lushushu137.github.io/COMP5322-Mid-Term/'><h3>- Made by Lu Shu</h3> </a>
+     
+      `;
+      ambience.pause();
+      document.getElementById("game_area").appendChild(overlay);
+      setTimeout(() => ending.play(), 500);
+    } else {
+      overlay.innerHTML = `<h1>Day ${day} - You totally have ${coin} coins now.</h1>
+      scrub to next day ->
+      `;
+      document.getElementById("game_area").appendChild(overlay);
+      ambience.pause();
+      disableStart = false;
+      setTimeout(() => ending.play(), 500);
+      checkScroll((inputList) => {
+        ending.pause();
+        scrubToStart(inputList);
+      });
+    }
   };
   handleIsSuspendDialogue = () => {
     suspendDialogue = true;
@@ -120,7 +129,7 @@ let scrubToStart = (inputList) => {
     let overlay = document.getElementById("overlay");
     overlay
       ? document
-          .getElementById("container")
+          .getElementById("game_area")
           .removeChild(document.getElementById("overlay"))
       : null;
     switchBrightness(1);

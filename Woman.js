@@ -1,7 +1,8 @@
 import {
-  aliceDialogueMap,
-  susanDialogueMap,
-  carolineDialogueMap,
+  aliceDialogueMap1,
+  susanDialogueMap1,
+  weiliDialogueMap1,
+  carolineDialogueMap1,
 } from "./allDialogue.js";
 import { Dialogue } from "./Dialogue.js";
 import {
@@ -17,7 +18,6 @@ const brushAudio = new Audio(
 );
 
 export class Woman {
-  womanIterator = iterator(womanList);
   currWoman;
   emmm;
   dirtState = {
@@ -31,7 +31,8 @@ export class Woman {
     21: 1,
     22: 1,
   };
-  constructor() {
+  constructor(day) {
+    this.womanIterator = iterator(womanList, day);
     this.currWoman = this.womanIterator.next().value;
     this.render();
     this.emmm = new Audio("./assets/audio/Human Female Mmm 01.wav");
@@ -86,28 +87,36 @@ export class Woman {
     womanDiv.style.zIndex = 0;
   }
 }
-function* iterator(list = womanList) {
+function* iterator(list, day) {
   for (let item of list) {
-    yield item;
+    if (item.day === day) {
+      yield item;
+    }
   }
 }
 const womanList = [
   {
     name: "Susan",
-    type: "old",
-    dialogue: susanDialogueMap,
-    imgUrl: "/assets/old.png",
+    dialogue: susanDialogueMap1,
+    imgUrl: "/assets/susan.png",
+    day: 1,
   },
-  // {
-  //   name: "Alice",
-  //   type: "young",
-  //   dialogue: aliceDialogueMap,
-  //   imgUrl: "/assets/young.png",
-  // },
-  // {
-  //   name: "Caroline",
-  //   type: "beauty",
-  //   dialogue: carolineDialogueMap,
-  //   imgUrl: "/assets/beauty.png",
-  // },
+  {
+    name: "Alice",
+    dialogue: aliceDialogueMap1,
+    imgUrl: "/assets/alice.png",
+    day: 1,
+  },
+  {
+    name: "Caroline",
+    dialogue: carolineDialogueMap1,
+    imgUrl: "/assets/caroline.png",
+    day: 2,
+  },
+  {
+    name: "Weili",
+    dialogue: weiliDialogueMap1,
+    imgUrl: "/assets/weili.png",
+    day: 2,
+  },
 ];

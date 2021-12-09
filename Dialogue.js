@@ -72,8 +72,8 @@ export class Dialogue {
     const cough = new Audio(
       "./assets/audio/Human Female Cough Short Cough 01.wav"
     );
-    coin.volume = 0.8;
-    cough.volume = 0.8;
+    coin.volume = 0.5;
+    cough.volume = 0.5;
     cough.play();
     setPlayerAnimation(playerAnimationStatus.stop);
     let choice1Div = document.createElement("button");

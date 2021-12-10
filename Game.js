@@ -68,7 +68,7 @@ let start = () => {
       <p>Because of limited time, I have only made these contents and there are many shortcomings.</p>
       <p>If you want to discuss with me, please send me email.</p>
       <p>Thank you for playing here!</p>
-      <a href='https://lushushu137.github.io/COMP5322-Mid-Term/'><h3>- Made by Lu Shu</h3> </a>
+      <a href='https://lushushu137.github.io/COMP5322-Mid-Term/' target="_blank"><h3>- Made by Lu Shu</h3> </a>
      
       `;
       ambience.pause();

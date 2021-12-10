@@ -263,3 +263,57 @@ h1 {
   color: rgba(134, 32, 0, 0);
   filter: brightness(1.5);
 }
+
+.section {
+  margin-bottom: 100px;
+  width: 100%;
+  text-align: left;
+}
+.flex-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.touch {
+  /* width: 50%; */
+}
+
+.about-content {
+  text-align: left;
+  margin: 30px;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+.card {
+  margin: 0 30px;
+  padding: 20px;
+  height: 300px;
+  flex: 1;
+  /* border: solid 1px; */
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgb(179, 179, 179);
+}
+
+.table-img {
+  object-fit: cover;
+  object-position: 100% 0;
+  width: 90px;
+  height: 150px;
+}
+table {
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+td,
+th {
+  border: 1px solid #999;
+  padding: 20px;
+  text-align: left;
+  min-width: 100px;
+}
+td:nth-child(4) {
+  padding: 10px;
+}
